@@ -116,6 +116,10 @@ class _Call(object):
         if not self.called:
             return None
         return self.gt_type == 1
+    
+    def add_field(self, name, value):
+        new_cls = make_calldata_tuple(list(self.data._fields) + [name])
+        self.data = new_cls._make(list(iter(self.data)) + [value])
 
     @property
     def is_filtered(self):
